@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="8dp">
 
     <ImageView
         android:id="@+id/horoscopeImageView"
@@ -16,22 +17,23 @@
         android:layout_weight="1"
         android:orientation="vertical"
         android:layout_marginStart="8dp"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/nameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/horoscope_name_aries"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/datesTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Fechas del horoscopo"
-            android:textSize="15dp"
+            android:text="@string/horoscope_date_aries"
+            android:textSize="15sp"
             android:textStyle="bold"/>
 
 
