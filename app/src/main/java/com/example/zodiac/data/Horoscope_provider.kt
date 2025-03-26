@@ -67,7 +67,7 @@ class Horoscope_provider {
             return horoscopeList
         }
 
-        fun geByID(id: String): Horoscope_data? {
+        fun getById(id: String): Horoscope_data? {
             return horoscopeList.find {
                 it.id == id
             }

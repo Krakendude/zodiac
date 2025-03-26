@@ -1,6 +1,9 @@
 package com.example.zodiac.activities
 
+import android.media.Image
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +13,11 @@ import com.example.zodiac.R
 import com.example.zodiac.data.Horoscope_provider
 
 class DetailActivity : AppCompatActivity() {
+
+    lateinit var nameTextView: TextView
+    lateinit var datesTextView: TextView
+    lateinit var horoscopeImageView: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -20,10 +28,16 @@ class DetailActivity : AppCompatActivity() {
             insets
         }
 
-        val id = intent.getStringExtra("HOROSCOPE_IDs")
+        nameTextView = findViewById(R.id.nameTextView)
+        datesTextView = findViewById(R.id.datesTextView)
+        horoscopeImageView = findViewById(R.id.horoscopeImageView)
 
-        val horoscope = Horoscope_provider.getById(id)
+        val id = intent.getStringExtra("HOROSCOPE_IDs")!!
 
-        Toast.makeText(this, id, Toast.LENGTH_SHORT).show()
+        val horoscope = Horoscope_provider.getById(id)!!
+
+        nameTextView.setText(horoscope.name)
+        datesTextView.setText(horoscope.date)
+        horoscopeImageView.setImageResource(horoscope.icon)
     }
 }
