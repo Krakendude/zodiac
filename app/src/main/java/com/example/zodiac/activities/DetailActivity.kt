@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.zodiac.R
+import com.example.zodiac.data.Horoscope_provider
 
 class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +21,8 @@ class DetailActivity : AppCompatActivity() {
         }
 
         val id = intent.getStringExtra("HOROSCOPE_IDs")
+
+        val horoscope = Horoscope_provider.getById(id)
 
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show()
     }
