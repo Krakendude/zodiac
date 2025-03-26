@@ -19,13 +19,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nombre"
-        android:textSize="50sp"/>
+        android:textSize="50sp"
+        android:textAlignment="center"/>
 
     <TextView
         android:id="@+id/datesTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="fechas"
-        android:textSize="30sp"/>
+        android:textSize="30sp"
+        android:textAlignment="center"/>
 
 </LinearLayout>
