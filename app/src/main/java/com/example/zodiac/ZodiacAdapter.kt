@@ -1,5 +1,6 @@
 package com.example.zodiac
 
+import android.icu.text.Transliterator.Position
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.zodiac.data.Horoscope_data
 
-class HoroscopeAdapter(val items: List<Horoscope_data>) : Adapter<HoroscopeViewHolder>() {
+class HoroscopeAdapter(val items: List<Horoscope_data>, val onItemClick: (Int) -> Unit) : Adapter<HoroscopeViewHolder>() {
 
     // Cual es la vista de las celdas
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HoroscopeViewHolder {
@@ -26,6 +27,9 @@ class HoroscopeAdapter(val items: List<Horoscope_data>) : Adapter<HoroscopeViewH
     override fun onBindViewHolder(holder: HoroscopeViewHolder, position: Int) {
         val horoscope = items[position]
         holder.render(horoscope)
+        holder.itemView.setOnClickListener {
+            onItemClick(position)
+        }
     }
 }
 
