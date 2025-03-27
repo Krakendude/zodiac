@@ -29,4 +29,10 @@
     <string name="horoscope_date_aquarius">January 20th to February 18th</string>
     <string name="horoscope_date_pisces">February 19th to March 20th</string>
 
+
+    <string name="menu_search">Search</string>
+    <string name="menu_share">Share</string>
+    <string name="favorite_selected">favorite</string>
+    <string name="favorite_unselected">not favorite</string>
+
 </resources>
