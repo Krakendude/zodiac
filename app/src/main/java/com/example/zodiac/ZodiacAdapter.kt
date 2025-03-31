@@ -1,6 +1,5 @@
 package com.example.zodiac
 
-import android.icu.text.Transliterator.Position
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,9 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.zodiac.data.Horoscope_data
+import com.example.zodiac.data.Horoscope
 
-class HoroscopeAdapter(val items: List<Horoscope_data>, val onItemClick: (Int) -> Unit) : Adapter<HoroscopeViewHolder>() {
+class HoroscopeAdapter(var items: List<Horoscope>, val onItemClick: (Int) -> Unit) : Adapter<HoroscopeViewHolder>() {
 
     // Cual es la vista de las celdas
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HoroscopeViewHolder {
@@ -31,6 +30,11 @@ class HoroscopeAdapter(val items: List<Horoscope_data>, val onItemClick: (Int) -
             onItemClick(position)
         }
     }
+
+    fun updateItems(items: List<Horoscope>) {
+        this.items = items
+        notifyDataSetChanged()
+    }
 }
 
 class HoroscopeViewHolder(view: View) : ViewHolder(view) {
@@ -39,7 +43,7 @@ class HoroscopeViewHolder(view: View) : ViewHolder(view) {
     val datesTextView: TextView = view.findViewById(R.id.datesTextView)
     val horoscopeImageView: ImageView = view.findViewById(R.id.horoscopeImageView)
 
-    fun render(horoscope: Horoscope_data) {
+    fun render(horoscope: Horoscope) {
         nameTextView.setText(horoscope.name)
         datesTextView.setText(horoscope.date)
         horoscopeImageView.setImageResource(horoscope.icon)
