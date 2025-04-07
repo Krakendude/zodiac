@@ -122,11 +122,11 @@ class DetailActivity : AppCompatActivity() {
 
     }
 
-    fun getHoroscopeLuck() {
+    fun getHoroscopeLuck(period:String = "daily") {
         progressBar.visibility = View.VISIBLE
 
         CoroutineScope(Dispatchers.IO).launch {
-            val url = URL("https://horoscope-app-api.vercel.app/api/v1/get-horoscope/daily?sign=${horoscope.id}")
+            val url = URL("https://horoscope-app-api.vercel.app/api/v1/get-horoscope/${period}?sign=${horoscope.id}")
 
             // HTTP Connexion
             val urlConnection = url.openConnection() as HttpsURLConnection
