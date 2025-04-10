@@ -18,6 +18,7 @@ import com.example.zodiac.R
 import com.example.zodiac.data.Horoscope
 import com.example.zodiac.data.Horoscope_provider
 import com.example.zodiac.utils.SessionManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -42,14 +43,18 @@ class DetailActivity : AppCompatActivity() {
     lateinit var  favoriteMenuITem: MenuItem
     lateinit var horoscopeLuckTextView: TextView
     lateinit var progressBar: LinearProgressIndicator
+    lateinit var navigationBar: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         enableEdgeToEdge()
+
         setContentView(R.layout.activity_detail)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
             insets
         }
 
@@ -60,6 +65,7 @@ class DetailActivity : AppCompatActivity() {
         horoscopeImageView = findViewById(R.id.horoscopeImageView)
         horoscopeLuckTextView= findViewById(R.id.horoscopeLuckTextView)
         progressBar = findViewById(R.id.progressBar)
+        navigationBar = findViewById(R.id.navigationBar)
 
         val id = intent.getStringExtra("HOROSCOPE_IDs")!!
 
@@ -67,10 +73,25 @@ class DetailActivity : AppCompatActivity() {
 
         isFAvorite = session.getFavoriteHoroscope() == horoscope.id
 
+        supportActionBar?.setTitle(horoscope.name)
+        supportActionBar?.setSubtitle(horoscope.date)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
         nameTextView.setText(horoscope.name)
         datesTextView.setText(horoscope.date)
         horoscopeImageView.setImageResource(horoscope.icon)
+
+        navigationBar.setOnItemSelectedListener {  menuItem ->
+            val period = when (menuItem.itemId){
+                R.id.menu_daily -> "daily"
+                R.id.menu_weekly -> "weekly"
+                R.id.menu_monthly -> "monthly"
+                else -> "daily"
+            }
+            getHoroscopeLuck(period)
+            true
+        }
 
         getHoroscopeLuck()
     }
@@ -86,6 +107,10 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
             R.id.favorite -> {
                 if (isFAvorite) {
                     session.setFavoriteHoroscope("")
